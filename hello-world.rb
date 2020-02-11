@@ -59,3 +59,25 @@ useless_variable_2 = 20
 useless_variable_3 = 2
 puts useless_variable_2 *= useless_variable_3
 puts useless_variable_2
+
+
+#Useful things with if and than statements
+
+#Two conditions can be used in an if statements
+# if useless_variable equals 2 or 3 then true
+if useless_variable == 2 || useless_variable == 3
+  puts "true"
+end
+# if useless_variable is 2 and useless_variable_2 is 4
+if useless_variable == 2 && useless_variable_2 == 4
+  puts "true"
+end
+
+# if useless_variable is 2 then everything is okay but if it's 3 there's a problem.
+if useless_variable == 2
+  puts "okay"
+elsif useless_variable == 3
+  puts "there's a problem"
+else
+  puts "we're not sure"
+end
