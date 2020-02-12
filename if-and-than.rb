@@ -1,4 +1,5 @@
-winning_number = 10 #Number in which Ruby will respond with success
+max_guess_number = 20
+winning_number = rand(max_guess_number + 1) #Number in which Ruby will respond with success
 warm_number_range = 3 #Changes the range of numbers considered warm
 warm_number_high = winning_number + warm_number_range
 warm_number_low = winning_number - warm_number_range
