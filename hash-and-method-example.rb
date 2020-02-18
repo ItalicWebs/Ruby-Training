@@ -77,6 +77,67 @@ customer_information = {
 
 # Methods
 
+def start_order_tracking(online_orders:, account_rep:, customer_information:)
+	system "clear" # Ruby standard but doesn't work in Windows Interactive
+	system('cls') # Works in Windows Inactive
+
+	puts "-- Welcome to our order tracker --"
+	puts "Please enter your order number below for us to look up"
+	puts query_order_number = gets.chomp
+	
+	if (online_orders).keys.include?(query_order_number)
+		puts "Checking Your Order. Please wait"
+	else
+		puts "[ERROR] Could not locate your order! Press enter to try again."
+		gets
+		start_order_tracking(online_orders: online_orders, account_rep: account_rep, customer_information: customer_information,)
+	end
+	system "clear" # Ruby standard but doesn't work in Windows Interactive
+	system('cls') # Works in Windows Inactive
+	
+	# Pulls the customer ID from the order. This could be eliminated as we could reference the array for information. 
+	resulting_customer_id = online_orders[query_order_number][:order_associated_customer]
+	# Pulls the complete array for the computer customer ID
+	resulting_customer_array = customer_information[resulting_customer_id]
+	# Pulls the customer's Account representative
+	resulting_account_rep = customer_information[resulting_customer_id][:cus_account_rep]
+	
+	# Welcomes the customer by their first name
+	puts "Hello #{resulting_customer_array[:cus_first_name]}!"
+
+	# Debugging
+	# puts online_orders[query_order_number][:order_status] == "arrived"
+
+	# Outputs order, it's current status and any action the customer should take
+	if online_orders[query_order_number][:order_status] == "arrived"
+		status_order_arrived(
+			ar_first_name: resulting_account_rep[:ar_first_name],
+			ar_last_name: resulting_account_rep[:ar_last_name],
+			ar_contact_phone: resulting_account_rep[:ar_contact_phone_1],
+			ar_contact_email: resulting_account_rep[:ar_contact_email_1],
+		)
+	
+	elsif online_orders[query_order_number][:order_status] == "shipping"
+		status_order_shipping
+	elsif online_orders[query_order_number][:order_status] == "pending credit"
+		system "clear"
+		status_order_pending_credit(
+			ar_first_name: resulting_account_rep[:ar_first_name],
+			ar_last_name: resulting_account_rep[:ar_last_name],
+			ar_contact_phone: resulting_account_rep[:ar_contact_phone_1],
+			ar_contact_email: resulting_account_rep[:ar_contact_email_1],
+		)
+	
+	else
+		status_order_pending_credit(
+			ar_first_name: resulting_account_rep[:ar_first_name],
+			ar_last_name: resulting_account_rep[:ar_last_name],
+			ar_contact_phone: resulting_account_rep[:ar_contact_phone_1],
+			ar_contact_email: resulting_account_rep[:ar_contact_email_1],
+		)
+	end	
+end
+
 def status_order_arrived(ar_first_name:, ar_last_name:, ar_contact_phone:, ar_contact_email:)
 	puts "Our tracking shows your package has arrived! If this is an error, please contact your representative using the information below:"
 	puts "#{ar_first_name} #{ar_last_name}"
@@ -84,7 +145,7 @@ def status_order_arrived(ar_first_name:, ar_last_name:, ar_contact_phone:, ar_co
 	puts "Over email: #{ar_contact_email}"
 end
  
-def status_order_shipping()
+def status_order_shipping
 	puts "We're working on getting your package shipped out. We'll get back to you soon!"
 end
  
@@ -101,68 +162,5 @@ def status_order_error(ar_first_name:, ar_last_name:, ar_contact_phone:, ar_cont
 	puts "Over the phone: #{ar_contact_phone}"
 	puts "Over email: #{ar_contact_email}"
 end
- 
 
-# Customer Output
-
-puts "-- Welcome to our order tracker --"
-puts "Please enter your order number below for us to look up"
-puts query_order_number = gets.chomp
-
-# puts (online_orders.keys).include?(query_order_number)
-
-# Error checking on order existing
-if (online_orders.keys).include?(query_order_number)
-	puts "Checking Your Order. Please wait"
-else
-	abort "[ERROR] Could not locate your order!"
-end
-
-# Pulls the customer ID from the order. This could be eliminated as we could reference the array for information. 
-resulting_customer_id = online_orders[query_order_number][:order_associated_customer]
-# Pulls the complete array for the computer customer ID
-resulting_customer_array = customer_information[resulting_customer_id]
-# Pulls the customer's Account representative
-resulting_account_rep = customer_information[resulting_customer_id][:cus_account_rep]
-
-# Debugging
-# puts resulting_customer_array
-# puts resulting_customer_id
-# puts customer_information[resulting_customer_id]
-# puts resulting_account_rep
-# puts customer_information[resulting_customer_id][:cus_account_rep]
-
-# Welcomes the customer by their first name
-puts "Hello #{resulting_customer_array[:cus_first_name]}!"
-
-# Debugging
-# puts online_orders[query_order_number][:order_status] == "arrived"
-
-# Outputs order, it's current status and any action the customer should take
-if online_orders[query_order_number][:order_status] == "arrived"
-	status_order_arrived(
-		ar_first_name: resulting_account_rep[:ar_first_name],
-		ar_last_name: resulting_account_rep[:ar_last_name],
-		ar_contact_phone: resulting_account_rep[:ar_contact_phone_1],
-		ar_contact_email: resulting_account_rep[:ar_contact_email_1],
-	)
-	
-elsif online_orders[query_order_number][:order_status] == "shipping"
-	status_order_shipping
-	
-elsif online_orders[query_order_number][:order_status] == "pending credit"
-	status_order_pending_credit(
-		ar_first_name: resulting_account_rep[:ar_first_name],
-		ar_last_name: resulting_account_rep[:ar_last_name],
-		ar_contact_phone: resulting_account_rep[:ar_contact_phone_1],
-		ar_contact_email: resulting_account_rep[:ar_contact_email_1],
-	)
-	
-else
-	status_order_pending_credit(
-		ar_first_name: resulting_account_rep[:ar_first_name],
-		ar_last_name: resulting_account_rep[:ar_last_name],
-		ar_contact_phone: resulting_account_rep[:ar_contact_phone_1],
-		ar_contact_email: resulting_account_rep[:ar_contact_email_1],
-	)
-end
+start_order_tracking(online_orders: online_orders, account_rep: account_rep, customer_information: customer_information,)
