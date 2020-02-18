@@ -48,27 +48,27 @@ account_rep = {
 
 customer_information = {
 	'cid_001' => {
-		ar_first_name: 'John',
-		ar_middle_name: 'P.',
-		ar_last_name: 'Doe',
-		ar_address_street_1: 'P.O Box 1001',
-		ar_address_street_2: 'Att: John',
-		ar_address_city: 'Fresno',
-		ar_address_state: 'CA',
-		ar_address_zip: '93702',
-		ar_address_country: 'United States',
-		ar_account_rep: account_rep["ar_001"]},
+		cus_first_name: 'John',
+		cus_middle_name: 'P.',
+		cus_last_name: 'Doe',
+		cus_address_street_1: 'P.O Box 1001',
+		cus_address_street_2: 'Att: John',
+		cus_address_city: 'Fresno',
+		cus_address_state: 'CA',
+		cus_address_zip: '93702',
+		cus_address_country: 'United States',
+		cus_account_rep: account_rep["ar_001"]},
 	'cid_002' => {
-		ar_first_name: 'Jane',
-		ar_middle_name: 'P.',
-		ar_last_name: 'Doe',
-		ar_address_street_1: 'P.O Box 1002',
-		ar_address_street_2: 'Att: Jane',
-		ar_address_city: 'Clovis',
-		ar_address_state: 'CA',
-		ar_address_zip: '93702',
-		ar_address_country: 'United States',
-		ar_account_rep: account_rep["ar_002"]},
+		cus_first_name: 'Jane',
+		cus_middle_name: 'P.',
+		cus_last_name: 'Doe',
+		cus_address_street_1: 'P.O Box 1002',
+		cus_address_street_2: 'Att: Jane',
+		cus_address_city: 'Clovis',
+		cus_address_state: 'CA',
+		cus_address_zip: '93702',
+		cus_address_country: 'United States',
+		cus_account_rep: account_rep["ar_002"]},
 }
 
 puts "-- Welcome to our order tracker --"
@@ -77,28 +77,33 @@ puts query_order_number = gets.chomp
 
 # puts (online_orders.keys).include?(query_order_number)
 
-# Does order exist?
+# Error checking on order existing
 if (online_orders.keys).include?(query_order_number)
 	puts "Checking Your Order. Please wait"
 else
 	abort "[ERROR] Could not locate your order!"
 end
 
+# Pulls the customer ID from the order. This could be eliminated as we could reference the array for information. 
 resulting_customer_id = online_orders[query_order_number][:order_associated_customer]
+# Pulls the complete array for the computer customer ID
 resulting_customer_array = customer_information[resulting_customer_id]
-resulting_account_rep = customer_information[resulting_customer_id][:ar_account_rep]
+# Pulls the customer's Account representative
+resulting_account_rep = customer_information[resulting_customer_id][:cus_account_rep]
 
 # Debugging
 # puts resulting_customer_array
 # puts resulting_customer_id
 # puts customer_information[resulting_customer_id]
 # puts resulting_account_rep
-# puts customer_information[resulting_customer_id][:ar_account_rep]
+# puts customer_information[resulting_customer_id][:cus_account_rep]
 
-puts "Hello #{resulting_customer_array[:ar_first_name]}!"
+# Welcomes the customer by their first name
+puts "Hello #{resulting_customer_array[:cus_first_name]}!"
 
 # puts online_orders[query_order_number][:order_status] == "arrived"
 
+# Outputs order, it's current status and any action the customer should take
 if online_orders[query_order_number][:order_status] == "arrived"
 	puts "We currently show your package as arrived. If you're unable to find your package or you believe this is an error, please contact your representative using the information below."
 	puts "#{resulting_account_rep[:ar_first_name]} #{resulting_account_rep[:ar_last_name]}"
