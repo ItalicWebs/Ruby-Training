@@ -17,6 +17,9 @@ if File.exist?(destination_file) == true
 		puts source_file
 		source_file.close
 		destination_file.close
+		# Debug
+		# puts source_file
+		# puts destination_file
 	else
 		puts "[INFO] Aborting"
 		exit
@@ -31,4 +34,7 @@ elsif File.exist?(destination_file) == false
 	puts source_file
 	source_file.close
 	destination_file.close
+	# Debug
+	# puts source_file
+	# puts destination_file
 end
