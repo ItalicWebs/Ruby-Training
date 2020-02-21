@@ -5,6 +5,8 @@ puts formatter % {first: "one", second: "two", third: "three", fourth: "four"}
 puts formatter % {first: true, second: false, third: true, fourth: false}
 puts formatter % {first: formatter, second: formatter, third: formatter, fourth: formatter}
 
+# Note this is a little different then normal. % just means it's passing a hash.
+
 puts formatter % {
   first: "I had this thing.",
   second: "That you could type up right.",
@@ -27,6 +29,8 @@ With this weird quote
 We'll be able to type as much as we like.
 Even 4 lines if we want, or 5, or 6.
 }
+
+# %q appends new lines for you.
 
 # Quotes
 
