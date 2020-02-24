@@ -1,0 +1,16 @@
+Modules are a good way to separate your code and make it easier to prevent conflicts when nameing
+
+If a module is designed to return false or isn't run at all, you can do something like this
+if has_been_run?
+  do_nothing
+else
+  run_something
+end
+
+You an also do if !has_been_run? which will run if false
+can also be done using unless has_been_run?
+
+5 examples of each truth tables
+He'd like a function if possible.
+Set a variable to the result of the expression.
+For example:
