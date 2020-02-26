@@ -47,6 +47,15 @@ module Logic
 		end
 	end
 
+	def Logic.pre_similarity_check_filler(ph_sim_current, ph_sim_prior, tested_liquid)
+		if !(ph_sim_current == tested_liquid && ph_sim_prior == tested_liquid)
+			Logic.ph_similarity_results(ph_similarity_current, ph_similarity_prior, user_values[:liquid_type])
+
+		elsif ph_sim_current == tested_liquid && ph_sim_prior == tested_liquid
+			# Sim Ignored
+		end
+	end
+
 	def Logic.ph_similarity_results(ph_sim_current, ph_sim_prior, tested_liquid)
 		# puts "Results pushed to logic"
 		# puts "Debug: #{ph_sim_current}"
@@ -67,6 +76,22 @@ module Logic
 			puts "Tested Liquid: #{tested_liquid}"
 		end
 		# puts "Check ended"
+	end
+
+	def Logic.ph_check_basic_filler(ph_value_current, ph_value_prior)
+		if !(ph_value_current > 6.5 && ph_value_prior > 8.5)
+			puts "DANGER! Both pH values were below safe levels!"
+		elsif !(ph_value_prior > 6.5 && ph_value_current > 8.5)
+			puts "DANGER! Both pH values were below safe levels!"
+		elsif not (ph_value_current > 6.5 || ph_value_current < 8.5)
+			puts "DANGER! Both pH value were below safe levels!"
+		elsif !(ph_value_current < 6.5 && ph_value_current < 8.5)
+			puts "Current pH levels are within safety range"
+		elsif not (ph_value_current < 6.5 || ph_value_current > 8.5)
+			puts "One of your current pH levels is within safety range"
+		elsif not (ph_value_prior < 6.5 || ph_value_prior > 8.5)
+			puts "One of your prior pH levels is within safety range"
+		end
 	end
 
 	def Logic.data_modifier(value_hash)
