@@ -82,3 +82,12 @@ eu_users_array.delete_at(2)
 # We can also remove by the value of the string
 en_users_array.delete("Jack")
 # If there's multiple Jack's, both will be removed. Be careful.
+
+# Adds orange to our array
+colors = ['red','yellow','green']
+colors << 'orange'
+
+# Sorting. This is not a destructive method but will instead create a new array in memory and return it to you.
+colors.sort
+
+# Destructive methods use less but for this we won't worry about it.

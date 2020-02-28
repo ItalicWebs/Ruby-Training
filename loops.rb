@@ -17,12 +17,26 @@ end
 # For and each loops
 # Basically you're telling Ruby to do a certain task a certain amount of times
 # Rarely used.
+
+# Don't use this
 for number_3 in 1..5
 	puts number_3
 end
 
+# Don't use this
 for number_4 in 1..5
 	puts "Hi"
+end
+
+# Use this instead
+fruits.each do |fruit|
+  puts "A fruit of type: #{fruit}"
+end
+
+colors.each { |color| puts "Color: #{color}" }
+
+colors.each do |color|
+  puts "Color: #{color}"
 end
 
 # Each loops
@@ -30,6 +44,7 @@ end
 (1..5).each do |num|
 	puts num
 end
+
 
 my_array = [1,2,3,4,5]
 my_array.each do |num|

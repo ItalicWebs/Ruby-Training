@@ -1,0 +1,90 @@
+For modules instead of
+
+module Logic
+
+	def Logic.data_collection
+		# puts "Enter the total amount of liquids per Gallon"
+		# total_gallon = gets.chomp
+		puts "Type of liquid?"
+
+
+module Logic
+
+	def self.data_collection
+			# puts "Enter the total amount of liquids per Gallon"
+			# total_gallon = gets.chomp
+			puts "Type of liquid?"
+
+We can just return the word true instead of using a variable.
+
+		def Logic.ph_safety_check(ph_value)
+			if ph_value > 6.5 && ph_value < 8.5
+				ph_safe_current = true
+			elsif ph_value < 6.5 || ph_value > 8.5
+				ph_safe_current = false
+			end
+		end
+
+
+		def Logic.ph_safety_check(ph_value)
+			if ph_value > 6.5 && ph_value < 8.5
+				true
+			elsif ph_value < 6.5 || ph_value > 8.5
+				false
+			end
+		end
+
+Instead of using an if than we could of done a when
+
+if ph_level_rnd == 1 || ph_level_rnd ==  2
+	ph_similarity = "Stomach Acid"
+elsif ph_level_rnd == 3
+	ph_similarity = "Cola"
+elsif ph_level_rnd == 5
+	ph_similarity = "Banana"
+elsif ph_level_rnd == 7
+	ph_similarity = "Water"
+elsif ph_level_rnd == 8
+	ph_similarity = "Blood"
+elsif ph_level_rnd == 9
+	ph_similarity = "Baking Soda"
+elsif ph_level_rnd == 12
+	ph_similarity = "Ammonia"
+else
+ph_similarity = false
+end
+end
+
+def self.ph_similarity(ph_level)
+  case ph_level.round
+  when 1 || 2 then 'Stomach Acid'
+  when 3 then 'Cola'
+  when 5 then 'Banana'
+  when 7 then 'Water'
+  when 9 then 'Blood'
+  when 12 then 'Ammonia'
+  else
+    false
+  end
+
+
+another way of doing it.
+
+PH_LEVELS = {
+  1 => 'Stomach Acid',
+  2 => 'Stomach Acid',
+  3 => 'Cola',
+  5 => 'Banana',
+  7 => 'Water',
+  9 => 'Blood',
+  12 => 'Ammonia'
+}.freeze
+def self.ph_similarity(ph_level)
+  PH_LEVELS[ph_level] || false
+
+  module is a collection of methods and classes for shared functionallity.
+  enuminable lets you play with arrays.
+
+Write a script to play with arrays. A script that isn't random but does something. Loop with arrays.
+Traveling
+Read 36
