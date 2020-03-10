@@ -1,0 +1,8 @@
+For modules try to always use WeatherMain. Don't use Weather_Main
+Use require fields should be above.
+Friendier names
+
+Neat thing you can do
+mapping.each { |key, val| puts "#{key} => #{val}" }
+
+%w(a b c d)
